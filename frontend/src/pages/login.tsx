@@ -1,8 +1,14 @@
-import React from "react";
+import React, {useState} from "react";
 import axios from "axios";
+import { Spinner } from "@/components/ui/spinner";
+import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 const Login: React.FC = () => {
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true)
     const formData = new FormData(e.currentTarget);
 
     const data = {
@@ -14,11 +20,18 @@ const Login: React.FC = () => {
         import.meta.env.VITE_BACKEND_URL + "/login",
         data
       );
-      const token = response.data.token;
-      localStorage.setItem("token", token);
-      alert("Login successful:"+ response.data);
+      if(response.status === 200){
+        const token = response.data.token;
+        localStorage.setItem("token", token);
+        toast.success("Login successfull",{ position: "top-center" });
+        setIsLoading(false);
+        navigate("/dashboard");
+      }
     } catch (error) {
       console.error("Login failed:", error);
+      toast.error("Login failed");
+    }finally{
+      setIsLoading(false);
     }
   };
   return (
@@ -70,9 +83,9 @@ const Login: React.FC = () => {
           {/* Button */}
           <button
             type="submit"
-            className="w-full mt-4 rounded-full bg-orange-500 py-3 text-white font-semibold shadow-lg hover:bg-orange-600 active:scale-[0.98] transition"
+            className="w-full flex justify-center text-center mt-4 rounded-full bg-orange-500 py-3 text-white font-semibold shadow-lg hover:bg-orange-600 active:scale-[0.98] transition"
           >
-            LOGIN
+            {isLoading ? <Spinner className="size-6" /> : "LOGIN"}
           </button>
         </form>
       </div>

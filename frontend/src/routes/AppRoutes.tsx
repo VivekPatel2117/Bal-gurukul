@@ -4,6 +4,7 @@ import AppLayout from "../layout/AppLayout";
 import Login from "../pages/login";
 import Center from "../pages/Center";
 import Dashboard from "../pages/Dashboard";
+ 
 const AppRoutes = () => {
   return (
     <Routes>
@@ -14,6 +15,7 @@ const AppRoutes = () => {
       <Route element={<AppLayout />}>
         <Route path="/centers" element={<Center />} />
         <Route path="/dashboard" element={<Dashboard />} /> 
+        <Route path="/dashboard/:centerId" element={<Dashboard />} /> 
       </Route>
 
       {/* <Route path="*" element={<NotFound />} /> */}
