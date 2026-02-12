@@ -3,6 +3,8 @@ import {
   createCenterService,
   getCentersService,
   getCenterByIdService,
+  updateCenterService,
+  deleteCenterService
 } from "./center.service";
 
 export const createCenter = async (req: Request, res: Response) => {
@@ -35,4 +37,43 @@ export const getCenterById = async (req: Request, res: Response) => {
   }
 
   res.json({ success: true, data: center });
+};
+
+
+export const updateCenter = async (req: Request, res: Response) => {
+  try {
+    const updatedCenter = await updateCenterService(
+      req.params.id as string,
+      req.body
+    );
+
+    res.json({
+      success: true,
+      message: "Center updated successfully",
+      data: updatedCenter,
+    });
+  } catch (error: any) {
+    res.status(400).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+
+
+export const deleteCenter = async (req: Request, res: Response) => {
+  try {
+    await deleteCenterService(req.params.id as string);
+
+    res.json({
+      success: true,
+      message: "Center deleted successfully",
+    });
+  } catch (error: any) {
+    res.status(400).json({
+      success: false,
+      message: error.message,
+    });
+  }
 };
