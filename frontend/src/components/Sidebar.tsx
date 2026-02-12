@@ -8,6 +8,8 @@ import {
   Crown,
   CalendarCheck,
   Wallet,
+  Star,
+  ReceiptPoundSterlingIcon,
 } from "lucide-react";
 
 interface SidebarProps {
@@ -83,6 +85,21 @@ const menuItems = [
     path: "/fees",
     icon: <Wallet size={20} />,
   },
+  {
+    label: "Rating Board",
+    path: "/rating",
+    icon: <Star size={20} />,
+  },
+  { 
+    label: "Reports",
+    path: "/reports",
+    icon: <ReceiptPoundSterlingIcon size={20} />,
+  },
+  {
+    label: "Bus Management",
+    path: "/busManagement",
+    icon: <LayoutGrid size={20} />,
+  }
 ];
 
 /* ---------------- Sidebar ---------------- */

@@ -19,7 +19,7 @@ const AppLayout = () => {
         import.meta.env.VITE_BACKEND_URL + `/centers/${centerId}`
       );
       if(response.status === 200){
-        setCenterHeaderData(response.data);
+        setCenterHeaderData(response.data.data);
       }
     } catch (error) {
       console.log(error);

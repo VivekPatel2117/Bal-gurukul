@@ -9,6 +9,7 @@ const CenterMasterHeader: React.FC<CenterMasterHeaderProps> = ({
   title,
   subtitle,
   buttonText = "CREATE",
+  onSuccessCreate = () => {}
 }) => {
   const [open, setOpen] = useState<boolean>(false);
    const createCenter = async (
@@ -26,6 +27,10 @@ const CenterMasterHeader: React.FC<CenterMasterHeaderProps> = ({
       }
     );
 
+    if(response.status === 200){
+      setOpen(false);
+      onSuccessCreate();
+    }
     return response.data;
   } catch (error: any) {
     // Normalize backend error

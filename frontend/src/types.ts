@@ -1,6 +1,7 @@
 export type CenterMasterHeaderProps = {
   title: string;
   subtitle?: string;
+  onSuccessCreate?: () => void;
   buttonText?: string;
 };
 
